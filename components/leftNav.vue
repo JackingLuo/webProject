@@ -2,7 +2,7 @@
   <div class="leftNav">
     <ul class="leftUl" @click="choice($event)" ref="list">
       <li :class="nowLeft==0?'active':''"><nuxt-link :to="{path:'/popular'}">热门</nuxt-link></li>
-      <li :class="nowLeft==1?'active':''"><nuxt-link :to="{path:'/'}">销售/客服/市场</nuxt-link></li>
+      <li :class="nowLeft==1?'active':''"><nuxt-link :to="{path:'/saler'}">销售/客服/市场</nuxt-link></li>
       <li :class="nowLeft==2?'active':''"><nuxt-link :to="{path:'/'}">财务/人力资源/行政</nuxt-link></li>
       <li :class="nowLeft==3?'active':''"><nuxt-link :to="{path:'/'}">项目/质量/高级管理</nuxt-link></li>
       <li :class="nowLeft==4?'active':''"><nuxt-link :to="{path:'/'}">房产/建筑/物业管理</nuxt-link></li>

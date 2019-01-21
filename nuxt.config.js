@@ -29,12 +29,12 @@ module.exports = {
   /*
    **配置全局的css文件
    */
-  css:['~assets/css/normailze.css','element-ui/lib/theme-chalk/index.css'],//全局引入vant
+  css:['iview/dist/styles/iview.css','~assets/css/normailze.css'],//全局引入element的样式
   /*
   * plugins插件配置
   * */
   plugins:[
-    '~plugins/element',
+    '~plugins/iview'
   ],
   /*
    * 自定义进度条的配置,也可以自定义一个组件,显示路由切换时的加载状态

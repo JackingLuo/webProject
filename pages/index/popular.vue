@@ -2,13 +2,7 @@
     <div class="popular">
       <div class="popLeft">
         <div class="swiper">
-          <div class="block">
-            <el-carousel height="3.4rem">
-              <el-carousel-item v-for="item in 4" :key="item">
-                <h3>{{ item }}</h3>
-              </el-carousel-item>
-            </el-carousel>
-          </div>
+          <swiper :imgs="imgs"></swiper>
         </div>
         <div class="cardBox">
           <div class="cardOne">
@@ -18,20 +12,20 @@
             <div class="cardRight">
               <p>一段文字</p>
             </div>
-            <div class="cardBottom">
+            <div class="cardBottom" style="font-size: 12px">
               <span>2018-06-26</span><span style="margin-left: 0.2rem;">职引官</span>
-              <span style="margin-left: 1.6rem">1200</span>
+              <span style="margin-left: 1.6rem;">1200</span>
             </div>
           </div>
           <div class="cardTwo">
             <h3>标题</h3>
-            <el-row>
-              <el-col :span="6"><div>1</div></el-col>
-              <el-col :span="6"><div>2</div></el-col>
-              <el-col :span="6"><div>3</div></el-col>
-              <el-col :span="6"><div>4</div></el-col>
-            </el-row>
-            <div>
+            <Row>
+              <Col span="6">1</Col>
+              <Col span="6">2</Col>
+              <Col span="6">3</Col>
+              <Col span="6">4</Col>
+            </Row>
+            <div style="font-size: 12px">
               <span>2018-06-26</span><span style="margin-left: 0.2rem;">职引官</span>
               <span style="margin-left: 3rem">1200</span>
             </div>
@@ -39,49 +33,93 @@
         </div>
       </div>
       <div class="popRight">
-        <div class="search">
-          <el-input
-            placeholder="请输入内容"
-            prefix-icon="el-icon-search"
-            v-model="input">
-            <el-button slot="append" style="background-color: #f9ce39;color: #fff;border-bottom: 1px solid #f9ce39;border-radius: 0;transform: translateY(-1px)">搜索</el-button>
-          </el-input>
+        <div class="search" style="position: relative;">
+          <Icon type="ios-search" size="25" color="#ccc" style="position: absolute;top: 50%;left:0.08rem;transform: translateY(-50%);z-index: 20"/>
+          <Input prefix="ios-search" search enter-button="搜索" placeholder="请输入" style="height: 0.3rem;"/>
         </div>
         <div class="login">
           <div class="header">
-            <div class="headImg">头像</div>
+            <div class="headImg"></div>
             <h3>名字</h3>
             <div class="goOut">退出</div>
           </div>
-          <el-row>
-            <el-col :span="12"><div style="padding-left: 0.6rem;">发布</div></el-col>
-            <el-col :span="12"><div style="padding-left: 0.6rem;">粉丝</div></el-col>
-          </el-row>
-          <el-row style="margin: 0.2rem 0;">
-            <el-col :span="12"><div style="padding-left: 0.6rem;">新消息</div></el-col>
-            <el-col :span="12"><div style="padding-left: 0.6rem;">关注</div></el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24"><div style="padding-left: 0.6rem;">收藏</div></el-col>
-          </el-row>
+          <Row>
+            <Col span="12"><div style="padding-left: 0.6rem;">发布</div></Col>
+            <Col span="12"><div style="padding-left: 0.6rem;">粉丝</div></Col>
+          </Row>
+          <Row style="padding: 0.13rem 0;">
+            <Col span="12"><div style="padding-left: 0.6rem;">新消息</div></Col>
+            <Col span="12"><div style="padding-left: 0.6rem;">关注</div></Col>
+          </Row>
+          <Row>
+            <Col span="12"><div style="padding-left: 0.6rem;">收藏</div></Col>
+          </Row>
         </div>
-        <div class="hot">
-          <div class="hotTitle"><span></span>热榜</div>
-          <div class="hotBody">
-
-          </div>
-        </div>
+       <div class="swiperBox">
+         <Carousel v-model="value" dots="outside" radius-dot :loop="false" style="width: 100%;height: 100%; margin-top: 0.23rem;" arrow="never">
+           <CarouselItem>
+             <div class="hot">
+               <div class="hotTitle"><span></span>热榜</div>
+               <div class="hotBody">
+                 <div class="person">
+                   <Row>
+                     <Col span="8"><div class="smallHead"></div></Col>
+                     <Col span="9">
+                       <div>
+                         <h3 style="font-size: 14px;">名字</h3>
+                         <p style="margin-top: 0.05rem; font-size: 12px">2018-06-26</p>
+                       </div>
+                     </Col>
+                     <Col span="7" style="text-align: right"><div class="follow">+ 关注</div></Col>
+                   </Row>
+                 </div>
+                 <div class="info">
+                   <div class="infoTit">标题</div>
+                   <div class="infoImg">图片</div>
+                 </div>
+                 <div class="textCard info">
+                   <h3>标题</h3>
+                   <p class="text">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+                 </div>
+               </div>
+             </div>
+           </CarouselItem>
+           <CarouselItem>
+             <div class="demo-carousel">2</div>
+           </CarouselItem>
+           <CarouselItem>
+             <div class="demo-carousel">3</div>
+           </CarouselItem>
+           <CarouselItem>
+             <div class="demo-carousel">4</div>
+           </CarouselItem>
+         </Carousel>
+       </div>
       </div>
     </div>
 </template>
 
 <script>
+  import '../../assets/css/popularCss.css';
+  import swiper from "../../components/swiper"
     export default {
       name: "popular",
+      components:{
+        swiper
+      },
       data() {
         return {
-          input:""
+          imgs:[
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548065288552&di=3685ffd74b9a024815a8d7c0f7421e4e&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F728da9773912b31b38b68ca38b18367adbb4e166.jpg",
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548065256735&di=ef3feffcfdf84d449455d3bb3bfba3e6&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F18d8bc3eb13533fa65021ddba5d3fd1f40345b8b.jpg",
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548065288552&di=3685ffd74b9a024815a8d7c0f7421e4e&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F728da9773912b31b38b68ca38b18367adbb4e166.jpg",
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548065256735&di=ef3feffcfdf84d449455d3bb3bfba3e6&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F18d8bc3eb13533fa65021ddba5d3fd1f40345b8b.jpg"
+          ],
+          value:0,
         }
+      },
+      mounted(){
+
       },
       methods: {
 
@@ -148,9 +186,10 @@
   width: 3.8rem;
 }
 .login{
-  margin-top: 0.28rem;
+  margin-top: 0.23rem;
   background-color: #f5f5f5;
   padding-bottom: 0.4rem;
+  border-bottom: 2px solid #ffd026;
 }
 .header{
   padding: 0.18rem 0 0.1rem 0;
@@ -181,10 +220,11 @@
 .header h3{
   font-size: 0.22rem;
 }
+
 .hot{
-  margin-top: 0.28rem;
   background-color: #f5f5f5;
   padding: 0.2rem;
+  height: auto;
 }
 .hotTitle{
   position: relative;
@@ -203,24 +243,49 @@
 }
 .hotBody{
   background-color: #fff;
+  margin-top: 0.25rem;
+  padding:0 0.2rem 0 0;
+}
+.person{
+  padding: 0.2rem 0 0.2rem 0.2rem ;
+  border-bottom: 1px solid #999;
+}
+.smallHead{
+  width: 0.58rem;
+  height: 0.58rem;
+  border-radius: 50%;
+  text-align: right;
+  background-color: red;
+  margin-left: 0.25rem;
+}
+.info{
+  padding: 0.2rem 0 0.2rem 0.2rem;
+  border-bottom: 1px solid #999;
+}
+.infoImg{
+  padding-top: 0.2rem;
+}
+.textCard .text{
+  margin-top: 0.2rem;
+  display: -webkit-box;
+  /* -webkit-box-orient: vertical; */
+  /* !autoprefixer: off */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+  .follow{
+    display: inline-block;
+    text-align: right;
+    margin-top: 0.1rem;
+    border: 1px solid #3875f2;
+    text-align: center;
+    padding: 0.04rem 0.05rem;
+    font-size: 12px;
+  }
+.swiperBox{
+  position: relative;
 }
 
 
-
-
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 150px;
-  margin: 0;
-}
-
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n+1) {
-  background-color: #d3dce6;
-}
 </style>

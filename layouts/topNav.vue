@@ -104,12 +104,17 @@
   }
   .menuBox .quest{
     display: inline-block;
-    width: 1rem;
-    height: 0.4rem;
+    /*width: 1rem;*/
+    /*height: 0.4rem;*/
     border: 1px solid #fff;
     text-align: center;
     line-height: 0.4rem;
     cursor: pointer;
+    padding: 0.06rem 0.12rem;
+  }
+  .menuBox .quest:hover{
+    background-color: #f9ce39;
+    color: #fff;
   }
   .myBody{
     margin-top: 0.35rem;
