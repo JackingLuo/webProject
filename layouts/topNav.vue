@@ -68,13 +68,13 @@
     padding: 1rem 2.6rem 0 1.6rem;
   }
   .Topnav{
-    z-index: 999;
-    background-color:#202125;
-    height: 1rem;
-    width: 100%;
     position: fixed;
     top: 0;
     left: 0;
+    z-index:666;
+    background-color:#202125;
+    height: 1rem;
+    width: 100%;
     color: #fff;
     box-sizing: border-box;
     padding:0 2.6rem 0 3.68rem;

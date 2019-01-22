@@ -502,4 +502,30 @@ body{
   height: 0.6rem;
   font-size: 0.18rem;
 }
+.ivu-tabs>.ivu-tabs-bar{
+  border-bottom: 1px solid #fff;
+}
+
+.ivu-tabs-nav{
+  left: 50%;
+  transform: translateX(-50%);
+}
+.ivu-tabs-ink-bar{
+  background-color: #f0c521;
+  height: 0.05rem;
+  border-radius: 4px;
+}
+.ivu-tabs-nav .ivu-tabs-tab:hover{
+  color: #f0c521;
+}
+.ivu-tabs-nav .ivu-tabs-tab-active{
+  color: #f0c521;
+
+}
+.ivu-divider-inner-text{
+  color: #f0c521;
+}
+.secondForm .ivu-form-item{
+  margin-bottom: 0.1rem;
+}
 

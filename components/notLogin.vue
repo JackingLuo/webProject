@@ -4,18 +4,36 @@
     <p class="hello">Hello，你好！</p>
     <Row style="font-size: 0.3rem;font-weight: 700">
       <Col span="12" style="padding-right: 0.45rem;text-align: right;">
-        <span class="cusol">登录</span>
+        <span class="cusol" @click="login">登录</span>
       </Col>
       <Col span="12" style="padding-left: 0.45rem;text-align: left;">
         <span class="cusol">注册</span>
       </Col>
     </Row>
+    <modul v-if="show" @hideModul="hidemodul"></modul>
   </div>
 </template>
 
 <script>
+  import modul from "./modul";
     export default {
-        name: "notLogin"
+      name: "notLogin",
+      components:{
+        modul
+      },
+      data(){
+          return{
+            show:false
+          }
+      },
+      methods:{
+        login(){
+          this.show = true
+        },
+        hidemodul(data){
+          this.show = data;
+        }
+      }
     }
 </script>
 
