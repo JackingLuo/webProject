@@ -18,3 +18,10 @@
 
 }
 
+.botSwiper>.ivu-carousel>.ivu-carousel-dots-outside{
+  display: inline-block;
+  position: absolute;
+  top: 0.2rem;
+  right: -1rem;
+}
+

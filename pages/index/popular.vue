@@ -36,7 +36,7 @@
         <search @giveParent="getInputText"></search>
         <login></login>
        <div class="swiperBox">
-         <Carousel v-model="value" dots="outside" radius-dot :loop="false" style="width: 100%;height: 100%; margin-top: 0.23rem;" arrow="never">
+         <Carousel v-model="value" dots="outside" radius-dot :loop="false" style="width: 100%;height: 100%; margin-top: 0.23rem;" arrow="never" class="carouselBox">
            <CarouselItem>
              <div class="hot">
                <div class="hotTitle"><span></span>热榜</div>
@@ -132,7 +132,7 @@
 }
 .cardOne,.cardTwo{
   padding: 0.3rem 0 ;
-  border-top: 1px solid #999;
+  border-top: 1px solid #f5f5f5;
   position: relative;
 }
 .cardLeft{
@@ -172,9 +172,14 @@
   right: 0;
   width: 3.8rem;
 }
+.swiperBox{
+  position: relative;
+}
 
 
 
+
+/*右下轮播样式*/
 .hot{
   background-color: #f5f5f5;
   padding: 0.2rem;
@@ -238,9 +243,7 @@
     font-size: 12px;
     cursor: pointer;
   }
-.swiperBox{
-  position: relative;
-}
+
 
 
 </style>

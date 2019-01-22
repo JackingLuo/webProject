@@ -34,9 +34,7 @@
         for(let i=0;i<this.$refs.list.children.length;i++){
           this.$refs.list.children[i].className = '';
         }
-        if(e.target.localName==="li"){
-          e.target.className = 'active';
-        }else if(e.target.parentElement.localName==="li"){
+        if(e.target.parentElement.localName==="li"){
           e.target.parentElement.className = 'active';
         }
       },
