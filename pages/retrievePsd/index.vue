@@ -89,7 +89,7 @@
           this.showWhat=2
         },
         sendInfo(){
-          this.current=2;
+          this.current=1;
           this.showWhat=3
         },
         confirmSend(){
@@ -97,7 +97,7 @@
           this.showWhat=4
         },
         reset(){
-          this.current=4;
+          this.current=3;
           this.$Message.success('重置成功');
         },
         goBack(){

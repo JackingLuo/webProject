@@ -7,10 +7,10 @@
         <span class="cusol" @click="login">登录</span>
       </Col>
       <Col span="12" style="padding-left: 0.45rem;text-align: left;">
-        <span class="cusol">注册</span>
+        <span class="cusol" @click="register">注册</span>
       </Col>
     </Row>
-    <modul v-if="show" @hideModul="hidemodul"></modul>
+    <modul v-if="show" :value="value" @hideModul="hidemodul"></modul>
   </div>
 </template>
 
@@ -23,12 +23,18 @@
       },
       data(){
           return{
+            value:"loding",
             show:false
           }
       },
       methods:{
         login(){
-          this.show = true
+          this.value="loding";
+          this.show = true;
+        },
+        register(){
+          this.value="register";
+          this.show = true;
         },
         hidemodul(data){
           this.show = data;

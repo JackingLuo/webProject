@@ -3,7 +3,7 @@
     <div class="modelBody">
       <div class="topYeloow"></div>
       <div class="tabs">
-        <Tabs value="loding">
+        <Tabs :value="value">
           <TabPane label="登录" name="loding">
             <Form inline class="firstForm">
               <FormItem prop="user"  style="width: 100%;">
@@ -69,7 +69,12 @@
 
 <script>
     export default {
-        name: "modul",
+      name: "modul",
+      props: {
+        value: {
+          default: ''
+        },
+      },
         data(){
             return{
               formInline: {
@@ -81,6 +86,7 @@
         methods:{
           hideLoding(e){
             if(e.target.id=="over"){
+              //点击遮罩层关闭
               this.$emit("hideModul",false)
             }
           }
