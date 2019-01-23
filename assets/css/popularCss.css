@@ -13,15 +13,14 @@
   right: -1rem;
 }
 
-.ivu-carousel-dots li.ivu-carousel-active>button{
-  background-color: #ffd026;
+/*.ivu-carousel-dots li.ivu-carousel-active>button{*/
+  /*background-color: #ffd026;*/
+/*}*/
 
-}
-
-.botSwiper>.ivu-carousel>.ivu-carousel-dots-outside{
-  display: inline-block;
-  position: absolute;
-  top: 0.2rem;
-  right: -1rem;
-}
+/*.botSwiper>.ivu-carousel>.ivu-carousel-dots-outside{*/
+  /*display: inline-block;*/
+  /*position: absolute;*/
+  /*top: 0.2rem;*/
+  /*right: -1rem;*/
+/*}*/
 

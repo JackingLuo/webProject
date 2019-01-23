@@ -36,6 +36,8 @@
       created(){
           if(this.$route.path=="/pepCircle"){
             this.nowNum = 2;
+          }else if(this.$route.path=="/jobQuotation"){
+            this.nowNum = 3;
           }
       },
       methods:{
@@ -48,7 +50,8 @@
           this.$router.push({path:"/pepCircle"});
         },
         clickThree(){
-          this.nowNum = 3
+          this.nowNum = 3;
+          this.$router.push({path:"/jobQuotation"});
         },
         clickFour(){
           this.nowNum = 4
