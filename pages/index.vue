@@ -28,5 +28,6 @@ export default {
     top: 1.35rem;
     left: 1.65rem;
   }
+
 </style>
 

@@ -483,7 +483,19 @@ html,body,#__nuxt,#__layout{
 body{
   font-size: 14px;
 }
-
+input::input-placeholder{color:#b8c4ce!important;}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #b8c4ce!important;
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: #b8c4ce!important;
+}
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #b8c4ce!important;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #b8c4ce!important;
+}
 /*全局覆盖iview样式*/
 /*覆盖搜索框的样式*/
 .search .ivu-input-search{
@@ -527,5 +539,26 @@ body{
 }
 .secondForm .ivu-form-item{
   margin-bottom: 0.1rem;
+}
+.ivu-tabs-nav{
+  font-size: 18px;
+}
+.inputBox .ivu-input-with-prefix{
+  border-radius: 4px 0 0 4px;
+}
+.inputBox .ivu-input-large{
+  height: 0.6rem;
+}
+.inputBox .ivu-input-wrapper-large .ivu-input-prefix i{
+  line-height: 0.6rem;
+}
+.firstForm .ivu-form-item{
+  margin-bottom: 0;
+}
+.firstForm .ivu-input,.secondForm .ivu-input {
+  height: 0.6rem;
+}
+.firstForm .ivu-input-wrapper-large .ivu-input-prefix i,.secondForm .ivu-input-wrapper-large .ivu-input-prefix i{
+  line-height: 0.6rem;
 }
 

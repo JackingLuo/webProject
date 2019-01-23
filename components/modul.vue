@@ -5,47 +5,55 @@
       <div class="tabs">
         <Tabs value="loding">
           <TabPane label="登录" name="loding">
-            <Row>
-              <Input placeholder="请输入手机号/邮箱" style="width: 100%;font-size: 12px" size="large">
-              <Icon type="md-tablet-portrait" slot="prefix" color="#f0c521" />
-              </Input>
-            </Row>
-            <Row style="margin-top: 0.35rem;">
-              <Input placeholder="请输入密码" style="width: 100%" size="large">
-              <Icon type="ios-key-outline" slot="prefix" color="#f0c521" />
-              </Input>
-            </Row>
-            <Row style="margin-top: 0.15rem;text-align: right;font-size: 12px;">
-              <span style="cursor: pointer"><Icon type="ios-key-outline" color="#f0c521"/>找回密码</span>
-            </Row>
-            <Row style="margin-top: 0.35rem;">
-              <div class="submitBtn">登录</div>
-            </Row>
+            <Form inline class="firstForm">
+              <FormItem prop="user"  style="width: 100%;">
+                <Input placeholder="请输入手机号/邮箱" style="width: 100%;font-size: 12px" size="large">
+                <Icon type="md-tablet-portrait" slot="prefix" color="#f0c521" size="20" />
+                </Input>
+              </FormItem>
+              <FormItem prop="password"  style="width: 100%;margin-top: 0.3rem;">
+                <Input placeholder="请输入密码" style="width: 100%" size="large">
+                <Icon type="ios-key-outline" slot="prefix" color="#f0c521" size="20"/>
+                </Input>
+              </FormItem>
+              <Row style="margin-top: 0.15rem;text-align: right;font-size: 12px;">
+                <span style="cursor: pointer;color: #999;"><Icon type="ios-key-outline" color="#f0c521"/>找回密码</span>
+              </Row>
+              <FormItem style="width: 100%; margin-top: 0.45rem;">
+                <div class="submitBtn">登录</div>
+              </FormItem>
+            </Form>
           </TabPane>
           <TabPane label="注册" name="register">
             <Form :model="formInline" inline class="secondForm">
               <FormItem style="width: 100%;">
                 <Input placeholder="昵称" style="width: 100%;" size="large">
-                <Icon type="md-contact" slot="prefix" color="#f0c521" />
+                <Icon type="md-contact" slot="prefix" color="#f0c521"size="20" />
                 </Input>
               </FormItem>
               <FormItem style="width: 100%;">
                 <Input placeholder="手机号" style="width: 100%" size="large">
-                <Icon type="md-tablet-portrait" slot="prefix" color="#f0c521" />
+                <Icon type="md-tablet-portrait" slot="prefix" color="#f0c521"size="20" />
                 </Input>
               </FormItem>
               <FormItem style="width: 100%;">
-                <Input>
-                <span slot="prepend"><Icon type="ios-chatbubbles" size="20" color="#f0c521"/></span>
-                <span slot="append">获取验证码</span>
-                </Input>
+                <Row>
+                  <Col span="16" class="inputBox">
+                    <Input placeholder="手机号" style="width: 100%" size="large">
+                    <Icon type="ios-chatbubbles" slot="prefix" color="#f0c521" size="20"/>
+                    </Input>
+                  </Col>
+                  <Col span="8">
+                    <div class="getBox">获取验证码</div>
+                  </Col>
+                </Row>
               </FormItem>
               <FormItem style="width: 100%;">
-                <Input placeholder="请输入密码" style="width: 100%" size="large">
-                <Icon type="ios-key-outline" slot="prefix" color="#f0c521" />
+                <Input placeholder="请设置登录密码" style="width: 100%" size="large">
+                <Icon type="ios-key-outline" slot="prefix" color="#f0c521" size="20" />
                 </Input>
               </FormItem>
-              <FormItem style="width: 100%;">
+              <FormItem style="width: 100%;margin-top: 0.25rem;">
                 <div class="submitBtn">注册</div>
               </FormItem>
             </Form>
@@ -75,9 +83,6 @@
             if(e.target.id=="over"){
               this.$emit("hideModul",false)
             }
-          },
-          clearE(e){
-            return false;
           }
         }
     }
@@ -123,6 +128,7 @@
   line-height: 0.6rem;
   color: #f0c521;
   border-radius: 5px;
+  font-size: 18px;
 }
 .submitBtn:hover{
   background-color: #2d2d2d;
@@ -130,7 +136,7 @@
   .modulBot{
     width: 100%;
     position: absolute;
-    bottom: 1.9rem;
+    bottom: 1.7rem;
     left: 0;
     padding:0 0.7rem ;
     color: #f0c521;
@@ -147,5 +153,19 @@
   width: 1rem;
   height: 1px;
   background-color: #f0c521;
+}
+.getBox{
+  width: 100%;
+  height: 0.6rem;
+  line-height: 0.6rem;
+  border: 1px solid #dbdbdb;
+  border-radius:0 4px 4px 0;
+  padding: 1px 0;
+  border-left: none;
+  cursor: pointer;
+}
+.getBox:hover{
+  background-color: #f0c521;
+  color: #fff;
 }
 </style>
