@@ -94,7 +94,7 @@
     position: relative;
   }
   .pepLeft{
-    width: 9.4rem;
+    width: 10rem;
   }
   .topMenu{
     width: 7.7rem;

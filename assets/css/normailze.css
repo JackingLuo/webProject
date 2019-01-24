@@ -586,3 +586,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   top: 0.2rem;
   right: -1rem;
 }
+.textArea .ivu-input{
+  border: 1px solid #ffd026;
+}

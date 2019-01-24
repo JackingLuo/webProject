@@ -85,7 +85,18 @@
             <div class="replyBtn" @click="clickReply"><span>回复</span></div>
           </div>
           <div class="myReply">
+            <div class="people">
+              <h3>微笑达人</h3>
+              <p style="font-size: 12px">2018-06-26</p>
+              <div class="headImg"></div>
+              <div class="richText">
 
+              </div>
+            </div>
+            <div class="textArea">
+              <Input v-model="valueArea" type="textarea" wrap="hard"  :rows="6" :autosize="{maxRows: 6,minRows: 6}"  placeholder="请写下您的评论 !" />
+              <div class="sendText">发送</div>
+            </div>
           </div>
       </div>
     </div>
@@ -132,6 +143,7 @@
           return{
             value1:0,
             list:[1,2],
+            valueArea:''
           }
       },
       methods:{
@@ -248,6 +260,9 @@
   font-size: 0.2rem;
   font-weight: 500;
 }
+.people p{
+  color: #aaa;
+}
 .headImg{
   position: absolute;
   top: 50%;
@@ -291,19 +306,51 @@
   background-color: #fff;
   padding: 0.2rem 0.2rem 0 0.2rem;
 }
-.otherReply .people h3{
+.otherReply .people h3,.myReply .people h3{
   font-size: 0.18rem;
 }
-.otherReply  .good span{
+.otherReply  .good span,.myReply .good span{
   font-size: 14px;
 }
-.otherReply .headImg{
+.otherReply .headImg,.myReply .headImg{
   width: 0.4rem;
   height: 0.4rem;
 }
-
-
-
+.myReply{
+  margin-top: 0.15rem;
+  background-color: #fff;
+  width: 100%;
+  padding: 0.2rem;
+}
+.myReply .people{
+  position: relative;
+}
+.richText{
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7rem;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  background-color: #f5f5f5;
+}
+.textArea{
+  margin-top: 0.1rem;
+  position: relative;
+}
+.sendText{
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  width: 0.67rem;
+  height: 0.3rem;
+  line-height: 0.3rem;
+  background-color: #ffd026;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
 
 
 
