@@ -1,5 +1,4 @@
 const rem ="document.documentElement.style.fontSize = document.documentElement.clientWidth/19.2+'px'";
-
 module.exports = {
   /*
   ** Headers of the page
@@ -29,7 +28,10 @@ module.exports = {
   /*
    **配置全局的css文件
    */
-  css:['iview/dist/styles/iview.css','~assets/css/normailze.css'],//全局引入element的样式
+  css:[
+    'iview/dist/styles/iview.css',
+    '~assets/css/normailze.css',
+  ],//全局引入element的样式
   /*
   * plugins插件配置
   * */
@@ -41,7 +43,7 @@ module.exports = {
    * */
   loading: {
     color: '#2d8cf0',
-    height: '2px'
+    height: '1px'
   },
   /*
   * 为每个路由页面设置中间件(全局中间件),设置的验证中间件可以在这里引入执行
@@ -66,8 +68,12 @@ module.exports = {
       'axios',
       'iview/dist/styles/iview.css',
       '~/assets/css/normailze.css',
-      'iview'
+      'iview',
+      'vue-quill-editor',
     ],//iview表示哪一个插件
+    plugins: [
+
+    ]
     /*
     ** Run ESLint on save
     */

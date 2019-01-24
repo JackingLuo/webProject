@@ -49,6 +49,7 @@
   padding: 0.3rem;
   text-align: center;
   margin-top: 0.2rem;
+  border-bottom: 2px solid #ffd026;
 }
   .notHead{
     display: inline-block;

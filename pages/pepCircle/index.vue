@@ -50,7 +50,6 @@
 </template>
 
 <script>
-  import '../../assets/css/popularCss.css';
   import hot from "../../components/hot";
   import dynamic from "../../components/dynamic";
   import answers from "../../components/answers";

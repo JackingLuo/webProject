@@ -573,3 +573,16 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .botSwiper .ivu-carousel-dots li button{
   background-color: #ffd026;
 }
+
+.ivu-carousel-arrow.left,.ivu-carousel-arrow.right{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.popRight .ivu-carousel-dots-outside{
+  display: inline-block;
+  position: absolute;
+  top: 0.2rem;
+  right: -1rem;
+}

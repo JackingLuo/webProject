@@ -80,7 +80,6 @@
 </template>
 
 <script>
-  import '../../assets/css/popularCss.css';
   import swiper from "../../components/swiper";
   import search from "../../components/search";
   import login from "../../components/login";
