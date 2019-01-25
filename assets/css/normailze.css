@@ -589,3 +589,15 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .textArea .ivu-input{
   border: 1px solid #ffd026;
 }
+.myFolder .ivu-form-item{
+  margin-bottom: 0;
+}
+.myFolder .ivu-form .ivu-form-item-label,.myFolder .ivu-form-item-content{
+  font-size: 14px;
+}
+.myFolder .ivu-radio-wrapper{
+  font-size: 14px;
+}
+.myFolder .ivu-form-item-content,.myFolder .ivu-radio-wrapper{
+  color: #000;
+}

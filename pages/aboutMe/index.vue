@@ -5,7 +5,9 @@
             <span>微笑达人</span>
             <div class="head"></div>
           </div>
-          <div class="start">五角星</div>
+          <div class="start">
+            <img src="~static/imgs/start.png">
+          </div>
           <div class="list">
             <Row>
               <Col span="8">
@@ -95,9 +97,13 @@
   }
   .start{
     position: absolute;
-    top: 0;
+    top: -2px;
     right: 1.15rem;
+    width: 0.36rem;
   }
+.start img{
+  width: 100%;
+}
   .list{
     width: 8.61rem;
     position: absolute;
