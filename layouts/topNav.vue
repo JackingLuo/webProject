@@ -16,7 +16,7 @@
             <div class="quest" @click="clickQuest">我要提问</div>
           </div>
         <div class="logo">
-          L
+          <img src="~static/imgs/logo.png">
         </div>
       </div>
       <div class="myBody">
@@ -80,6 +80,7 @@
     width: 100%;
     color: #fff;
     box-sizing: border-box;
+    /*padding: 0 260px 0 298px;*/
     padding:0 2.6rem 0 3.68rem;
   }
   .logo{
@@ -88,10 +89,13 @@
     left:1.65rem;
     transform: translateY(-50%);
   }
+  .logo img{
+    width: 2rem;
+  }
   .topLeft{
     font-size: 0.36rem;
     line-height: 1rem;
-    padding-left: 0.3rem;
+    padding-left: 30px;
   }
   .topRight{
     position: absolute;

@@ -48,7 +48,7 @@
     overflow: hidden;
     width: 0.9rem;
     height: 0.9rem;
-    background-color: #000;
+    background-color: #ddd;
   }
   .header .goOut{
     position: absolute;

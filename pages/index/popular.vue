@@ -213,7 +213,7 @@
   height: 0.58rem;
   border-radius: 50%;
   text-align: right;
-  background-color: red;
+  background-color: #ddd;
   margin-left: 0.25rem;
 }
 .info{
