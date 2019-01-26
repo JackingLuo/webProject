@@ -17,9 +17,9 @@
         <span style="font-size: 12px;color: #999;">2018-08-18</span>
         <div class="rightSome">
           <Row style="text-align: right">
-            <Col span="8">1200</Col>
-            <Col span="8">12</Col>
-            <Col span="8">120</Col>
+            <Col span="8"><Icon type="ios-eye" color="#aaa" size="20"/><span>1200</span></Col>
+            <Col span="8"><Icon type="md-text" color="#aaa" size="18"/><span>12</span></Col>
+            <Col span="8"><Icon type="md-thumbs-up" color="#aaa" size="20"/><span>120</span></Col>
           </Row>
         </div>
       </div>
@@ -51,7 +51,7 @@
     <div class="botSome">
       <span style="font-size: 12px;color: #999;">2018-08-18</span>
       <div class="rightSome">
-        <div style="text-align: right">120</div>
+        <div style="text-align: right"><Icon type="ios-eye" color="#aaa" size="20"/><span>120</span></div>
       </div>
     </div>
     <div class="botLine"></div>
@@ -175,7 +175,6 @@
 */
 
 
-
  /*
   卡片3
   */
@@ -183,11 +182,6 @@
 .info3{
   padding: 0.2rem;
 }
-
-
-
-
-
 
 
  /*

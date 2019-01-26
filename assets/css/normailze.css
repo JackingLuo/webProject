@@ -601,3 +601,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .myFolder .ivu-form-item-content,.myFolder .ivu-radio-wrapper{
   color: #000;
 }
+.swiper .ivu-carousel-dots li button,.swiperBox .ivu-carousel-dots li button{
+  background-color: #ffd026;
+}
