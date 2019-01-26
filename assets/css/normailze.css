@@ -604,3 +604,13 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .swiper .ivu-carousel-dots li button,.swiperBox .ivu-carousel-dots li button{
   background-color: #ffd026;
 }
+.progress .ivu-progress-inner{
+  background-color: #cfcfcf;
+}
+.progress .ivu-progress-bg{
+  border-radius: 0;
+  background-color: #ffd026;
+}
+.progress .ivu-progress-inner{
+  border-radius: 0;
+}

@@ -139,7 +139,7 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 7rem;
+    width: 70%;
     height: 0.4rem;
     line-height: 0.4rem;
     background-color: #f5f5f5;
