@@ -25,31 +25,31 @@
             </Form>
           </TabPane>
           <TabPane label="注册" name="register">
-            <Form :model="formInline" inline class="secondForm">
+            <Form :model="user" inline class="secondForm">
               <FormItem style="width: 100%;">
-                <Input placeholder="昵称" style="width: 100%;" size="large">
+                <Input placeholder="昵称" style="width: 100%;" size="large" v-model="user.nickname">
                 <Icon type="md-contact" slot="prefix" color="#f0c521"size="20" />
                 </Input>
               </FormItem>
               <FormItem style="width: 100%;">
-                <Input placeholder="手机号" style="width: 100%" size="large">
+                <Input placeholder="手机号" style="width: 100%" size="large" v-model="user.phone">
                 <Icon type="md-tablet-portrait" slot="prefix" color="#f0c521"size="20" />
                 </Input>
               </FormItem>
               <FormItem style="width: 100%;">
                 <Row>
                   <Col span="16" class="inputBox">
-                    <Input placeholder="手机号" style="width: 100%" size="large">
+                    <Input placeholder="手机号" style="width: 100%" size="large" v-model="user.verifyCode">
                     <Icon type="ios-chatbubbles" slot="prefix" color="#f0c521" size="20"/>
                     </Input>
                   </Col>
                   <Col span="8">
-                    <div class="getBox">获取验证码</div>
+                    <div class="getBox" @click="getverifyCode">获取验证码</div>
                   </Col>
                 </Row>
               </FormItem>
               <FormItem style="width: 100%;">
-                <Input placeholder="请设置登录密码" style="width: 100%" size="large">
+                <Input placeholder="请设置登录密码" style="width: 100%" size="large" v-model="user.password">
                 <Icon type="ios-key-outline" slot="prefix" color="#f0c521" size="20" />
                 </Input>
               </FormItem>
@@ -77,8 +77,11 @@
       },
         data(){
             return{
-              formInline: {
-
+              user: {
+                nickname:'',
+                phone:'',
+                verifyCode:'',
+                password:''
               },
 
             }
@@ -89,6 +92,10 @@
               //点击遮罩层关闭
               this.$emit("hideModul",false)
             }
+          },
+          getverifyCode(){
+            //调取验证码接口,设置定时器
+
           }
         }
     }

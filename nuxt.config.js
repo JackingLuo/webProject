@@ -68,8 +68,7 @@ module.exports = {
       'axios',
       'iview/dist/styles/iview.css',
       '~/assets/css/normailze.css',
-      'iview',
-      'vue-quill-editor',
+      'iview'
     ],//iview表示哪一个插件
     plugins: [
 

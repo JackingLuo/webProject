@@ -34,7 +34,6 @@
         }
       },
       methods:{
-
         toRecommend(){
           this.whoActive = 2;
           this.where = "jobRecommend"
