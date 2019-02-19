@@ -13,17 +13,17 @@
             <CarouselItem>
               <div class="hot">
                 <div class="hotTitle"><span></span>热榜</div>
-                <div class="hotBody">
+                <div class="hotBody" v-for="(item,index) in hotList" :key="index">
                   <div class="person">
                     <Row>
-                      <Col span="8"><div class="smallHead"></div></Col>
+                      <Col span="8"><div class="smallHead"><img :src="item.authorUrl"></div></Col>
                       <Col span="9">
                         <div>
-                          <h3 style="font-size: 14px;">名字</h3>
-                          <p style="margin-top: 0.05rem; font-size: 12px">2018-06-26</p>
+                          <h3 style="font-size: 14px;" v-text="item.author"></h3>
+                          <p style="margin-top: 0.05rem; font-size: 12px"  v-text="item.createTime"></p>
                         </div>
                       </Col>
-                      <Col span="7" style="text-align: right"><div class="follow">+ 关注</div></Col>
+                      <Col span="7" style="text-align: right"><div class="follow" v-text="item.isFollowed>0?'已关注':'+ 关注'"></div></Col>
                     </Row>
                   </div>
                   <div class="info">
@@ -69,39 +69,43 @@ export default {
   data(){
     return{
       value:0,
-      // requestRes:{
-      //   param:{
-      //     positionType:1,
-      //     pageSize:'',
-      //     pageNo:'',
-      //     orderBy:'',
-      //     keyword:'',
-      //     positionName:'',
-      //     slide:'yes',
-      //     recommend:'yes',
-      //     hot:'yes',
-      //   },
-      //   userId:19
-      // }
+      hotList:[],
+      requestRes:{
+        param:{
+          positionType:1,
+          pageSize:'',
+          pageNo:'',
+          orderBy:'',
+          keyword:'',
+          positionName:'',
+          slide:'yes',
+          recommend:'yes',
+          hot:'yes',
+        },
+        userId:19
+      }
     }
   },
   created(){
-    // this.init()
+    this.init();
   },
   methods:{
     init(){
       axios.post(HOME_PAGE,this.requestRes).then((res)=>{
         if(res.status==200){
-          console.log(res.data);
+          this.hotList = res.data.data.list;
+          let regExp = /\|/;
+          for(let i = 0;i<this.hotList.length;i++){
+            if(regExp.exec(this.hotList[i].imageUrls)){
+              let newArr = this.hotList[i].imageUrls.split('|');
+              this.hotList[i].imageUrls =newArr;
+            }
+          }
         }else{
           this.$Notice.error({
             title: "获取内容失败,请检查当前网络!",
           });
         }
-      }).catch((err)=>{
-        this.$Notice.error({
-          title: err.errMsg,
-        });
       })
     },
     //获取到子组件返回来的input框输入值
@@ -146,6 +150,7 @@ export default {
     font-size: 0.22rem;
     font-weight: 600;
     padding-left: 0.18rem;
+    margin-bottom: 0.2rem;
   }
   .hotTitle span{
     position: absolute;
@@ -158,12 +163,11 @@ export default {
   }
   .hotBody{
     background-color: #fff;
-    margin-top: 0.25rem;
     padding:0 0.2rem 0 0;
   }
   .person{
     padding: 0.2rem 0 0.2rem 0.2rem ;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #f5f5f5;
   }
   .smallHead{
     width: 0.58rem;
@@ -172,10 +176,15 @@ export default {
     text-align: right;
     background-color: #ddd;
     margin-left: 0.25rem;
+    overflow: hidden;
+  }
+  .smallHead img{
+    width: 100%;
+    height: 100%;
   }
   .info{
     padding: 0.2rem 0 0.2rem 0.2rem;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #f5f5f5;
   }
   .infoImg{
     padding-top: 0.2rem;

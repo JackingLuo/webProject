@@ -9,7 +9,7 @@
     :trigger="setting.trigger"
     :arrow="setting.arrow">
     <CarouselItem v-for="(item,index) in imgs" :key="index">
-      <div class="imageBOX"><img :src="item.imageUrls instanceof Array?item.imageUrls[0]:item.imageUrls" @click="this.$router.push({path:'/afterReply?id=item.id'})"></div>
+      <div class="imageBOX"><img :src="item.imageUrls instanceof Array?item.imageUrls[0]:item.imageUrls" @click="clickImg(item)"></div>
     </CarouselItem>
   </Carousel>
 </template>
@@ -34,7 +34,9 @@
       }
     },
     methods:{
-
+      clickImg(item){
+        this.$router.push({path:'/afterReply?id='+item.id})
+      }
     }
   }
 </script>
@@ -46,5 +48,6 @@
   .imageBOX img{
     width: 100%;
     height: 100%;
+    cursor: pointer;
   }
 </style>

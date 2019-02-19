@@ -53,6 +53,14 @@
           return{
             enterNum:1
           }
+        },
+        created(){
+          this.init()
+        },
+        methods:{
+          init(){
+            
+          }
         }
     }
 </script>
