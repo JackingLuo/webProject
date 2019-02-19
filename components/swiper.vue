@@ -9,7 +9,7 @@
     :trigger="setting.trigger"
     :arrow="setting.arrow">
     <CarouselItem v-for="(item,index) in imgs" :key="index">
-      <div class="imageBOX"><img :src="item"></div>
+      <div class="imageBOX"><img :src="item.imageUrls instanceof Array?item.imageUrls[0]:item.imageUrls" @click="this.$router.push({path:'/afterReply?id=item.id'})"></div>
     </CarouselItem>
   </Carousel>
 </template>
@@ -32,6 +32,9 @@
           arrow: 'hover'
         }
       }
+    },
+    methods:{
+
     }
   }
 </script>
