@@ -20,32 +20,32 @@
                       <Col span="9">
                         <div>
                           <h3 style="font-size: 14px;" v-text="item.author"></h3>
-                          <p style="margin-top: 0.05rem; font-size: 12px"  v-text="item.createTime"></p>
+                          <p style="margin-top: 0.05rem; font-size: 12px"  v-text="new Date(item.createTime).toLocaleDateString().replace(/\//g,'-')"></p>
                         </div>
                       </Col>
                       <Col span="7" style="text-align: right"><div class="follow" v-text="item.isFollowed>0?'已关注':'+ 关注'"></div></Col>
                     </Row>
                   </div>
-                  <div class="info">
-                    <div class="infoTit">标题</div>
-                    <div class="infoImg">图片</div>
-                  </div>
+                  <!--<div class="info">-->
+                    <!--<div class="infoTit" v-text="item.title"></div>-->
+                    <!--<div class="infoImg"><img src=""></div>-->
+                  <!--</div>-->
                   <div class="textCard info">
-                    <h3>标题</h3>
-                    <p class="text">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+                    <h3 v-text="item.title"></h3>
+                    <div class="text" v-html="item.contents"></div>
                   </div>
                 </div>
               </div>
             </CarouselItem>
-            <CarouselItem>
-              <div class="demo-carousel">2</div>
-            </CarouselItem>
-            <CarouselItem>
-              <div class="demo-carousel">3</div>
-            </CarouselItem>
-            <CarouselItem>
-              <div class="demo-carousel">4</div>
-            </CarouselItem>
+            <!--<CarouselItem>-->
+              <!--<div class="demo-carousel">2</div>-->
+            <!--</CarouselItem>-->
+            <!--<CarouselItem>-->
+              <!--<div class="demo-carousel">3</div>-->
+            <!--</CarouselItem>-->
+            <!--<CarouselItem>-->
+              <!--<div class="demo-carousel">4</div>-->
+            <!--</CarouselItem>-->
           </Carousel>
         </div>
       </div>
@@ -191,12 +191,19 @@ export default {
   }
   .textCard .text{
     margin-top: 0.2rem;
-    display: -webkit-box;
-    /* -webkit-box-orient: vertical; */
-    /* !autoprefixer: off */
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    /*display: -webkit-box;*/
+    /*!* -webkit-box-orient: vertical; *!*/
+    /*!* !autoprefixer: off *!*/
+    /*-webkit-box-orient: vertical;*/
+    /*-webkit-line-clamp: 2;*/
+    /*overflow: hidden;*/
+    text-overflow: -o-ellipsis-lastline;
     overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
   .follow{
     display: inline-block;

@@ -2,33 +2,29 @@
     <div class="afterReply">
       <div class="topBox">
         <div class="topTit">
-          <h2>总监级的思考</h2>
-          <div class="attention">+ 关注</div>
+          <h2 v-text="detailNews.title"></h2>
+          <div class="attention" v-text="detailNews.isFollowed>0?'已关注':'+ 关注'"></div>
         </div>
         <div class="nameHead">
-          <span>微笑</span>
-          <div class="imgBox"></div>
+          <span  v-text="detailNews.author"></span>
+          <div class="imgBox"><img :src="detailNews.authorUrl"></div>
         </div>
         <div class="topBot">
-          <span style="margin-left: 0.8rem;">2018-8-18</span>
-          <span><Icon type="ios-eye" color="#aaa" size="20" style="margin-right: 0.08rem;"/>120</span>
-          <span><Icon type="md-text" color="#aaa" size="18" style="margin-right: 0.08rem;"/>1200</span>
+          <span style="margin-left: 0.8rem;"  v-text="new Date(detailNews.createTime).toLocaleDateString().replace(/\//g,'-')"></span>
+          <span><Icon type="ios-eye" color="#aaa" size="20" style="margin-right: 0.08rem;" v-text="detailNews.queryCount"/></span>
+          <span><Icon type="md-text" color="#aaa" size="18" style="margin-right: 0.08rem;" v-text="detailNews.commentCount"/></span>
           <div class="myCollect" @mouseenter="enterNum=2" @mouseleave="enterNum=1">
             <Icon v-if="enterNum==1" type="md-star-outline" color="#aaa" size="28" style="position: absolute;top: 50%;transform: translateY(-50%);left: -5px;"/>
             <Icon v-if="enterNum==2" type="md-star"  color="#ffd026" size="28" style="position: absolute;top: 50%;transform: translateY(-50%);left: -5px;"/>
-            <span style="font-size: 18px;" :class="enterNum==2?'coll':''">收藏</span>
+            <span style="font-size: 18px;" :class="enterNum==2?'coll':''" v-text="detailNews.isCollect=='Y'?'已收藏':'收藏'" @click="collection"></span>
           </div>
         </div>
       </div>
       <div class="explain">
         <h2>名词解释</h2>
         <div class="explainCont">
-          <div class="cont">
-            一大段文字
-          </div>
-          <div class="expImg">
-            图片
-          </div>
+          <div class="cont" v-html="detailNews.contents"></div>
+          <!--<div class="expImg" v-for="(item,index) in detailNews.imageUrls" :key="index"><img :src="item"></div>-->
         </div>
         </div>
 
@@ -42,6 +38,8 @@
 <script>
   import rightSwiper from "../../components/rightSwiper";
   import critical from "../../components/critical";
+  import axios from "../../plugins/axios";
+  import {NEWS_CONTENT,ADD_COLLECT} from "~/server/api"
   export default {
         name: "index",
         layout:"topNav",
@@ -51,15 +49,51 @@
         },
         data(){
           return{
-            enterNum:1
+            enterNum:1,
+            detailNews:{},
+            requestRes:{
+              param:{
+                id:0,
+              },
+              userId:19,
+            }
           }
         },
         created(){
+          this.requestRes.param.id = this.$route.query.id;
           this.init()
         },
         methods:{
           init(){
-            
+            axios.post(NEWS_CONTENT,this.requestRes).then((res)=>{
+              if(res.status==200){
+                this.detailNews = res.data.data.detailNews;
+                let regExp = /\|/;
+                let newArr = null;
+                if(regExp.exec(this.detailNews.imageUrls)){
+                  newArr = this.detailNews.imageUrls.split('|');
+                }else{
+                  newArr = [];
+                  newArr.push(this.detailNews.imageUrls);
+                }
+                this.detailNews.imageUrls =newArr;
+              }else{
+                this.$Notice.error({
+                  title: "获取内容失败,请检查当前网络!",
+                });
+              }
+            })
+          },
+          collection(){
+            axios.post(ADD_COLLECT,this.requestRes).then((res)=>{
+              if(res.status==200){
+
+              }else{
+                this.$Notice.error({
+                  title: "获取内容失败,请检查当前网络!",
+                });
+              }
+            })
           }
         }
     }
@@ -104,6 +138,10 @@
     transform: translateY(-50%);
     left: 0;
   }
+.nameHead .imgBox img{
+  width: 100%;
+  height: 100%;
+}
   .topBot{
     position: relative;
   }

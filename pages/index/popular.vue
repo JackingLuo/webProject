@@ -13,7 +13,7 @@
                 <p v-text="item.title"></p>
               </div>
               <div class="cardBottom" style="font-size: 12px;margin-top: 15px;">
-                <span v-text="item.createTime"></span><span style="margin-left: 0.2rem;" v-text="item.author"></span>
+                <span v-text="new Date(item.createTime).toLocaleDateString().replace(/\//g,'-')"></span><span style="margin-left: 0.2rem;" v-text="item.author"></span>
                 <span style="margin-left: 1.6rem;"><Icon type="ios-eye" size="20" />{{item.queryCount}}</span>
               </div>
             </div>
@@ -23,7 +23,7 @@
                 <Col :span="1/item.imageUrls.length*24" v-for="(items,inde) in item.imageUrls" :key="inde"><img :src="items" width="90%"></Col>
               </Row>
               <div style="font-size: 12px">
-                <span v-text="item.createTime"></span><span style="margin-left: 0.2rem;"  v-text="item.author"></span>
+                <span v-text="new Date(item.createTime).toLocaleDateString().replace(/\//g,'-')"></span><span style="margin-left: 0.2rem;"  v-text="item.author"></span>
                 <span style="margin-left: 3rem"><Icon type="ios-eye" size="20"/>{{item.queryCount}}</span>
               </div>
             </div>
