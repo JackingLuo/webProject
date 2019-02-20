@@ -3,7 +3,7 @@
       <div class="topBox">
         <div class="topTit">
           <h2 v-text="detailNews.title"></h2>
-          <div class="attention" v-text="detailNews.isFollowed>0?'已关注':'+ 关注'"></div>
+          <!--<div class="attention" v-text="detailNews.isFollowed>0?'已关注':'+ 关注'" @click="clickFollow"></div>-->
         </div>
         <div class="nameHead">
           <span  v-text="detailNews.author"></span>
@@ -39,7 +39,7 @@
   import rightSwiper from "../../components/rightSwiper";
   import critical from "../../components/critical";
   import axios from "../../plugins/axios";
-  import {NEWS_CONTENT,ADD_COLLECT,DEL_COLLECT} from "~/server/api"
+  import {NEWS_CONTENT,ADD_COLLECT,DEL_COLLECT,ADD_FOLLOW,DEL_FOLLOW} from "~/server/api"
   export default {
         name: "index",
         layout:"topNav",
@@ -51,6 +51,12 @@
           return{
             enterNum:1,
             detailNews:{},
+            followRes:{
+              param:{
+                toUserId:0,
+              },
+              userId:19,
+            },
             collectRes:{
               param:{
                 mainId:0,
@@ -118,7 +124,30 @@
                 }
               })
             }
-          }
+          },
+          // clickFollow(){
+          //   if(this.detailNews.isFollowed>0){//已关注
+          //     axios.post(DEL_FOLLOW,this.followRes).then((res)=>{
+          //       if(res.status==200){
+          //         console.log(res.data);
+          //       }else{
+          //         this.$Notice.error({
+          //           title: res.data.errorMsg,
+          //         });
+          //       }
+          //     })
+          //   }else{
+          //     axios.post(ADD_FOLLOW,this.followRes).then((res)=>{
+          //       if(res.status==200){
+          //         console.log(res.data);
+          //       }else{
+          //         this.$Notice.error({
+          //           title: res.data.errorMsg,
+          //         });
+          //       }
+          //     })
+          //   }
+          // }
         }
     }
 </script>
