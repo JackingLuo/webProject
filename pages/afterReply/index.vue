@@ -74,7 +74,7 @@
         },
         created(){
           this.requestRes.param.id = this.$route.query.id;
-          this.collectRes.param.id = this.$route.query.id;
+          this.collectRes.param.mainId = this.$route.query.id;
           this.init()
         },
         methods:{
