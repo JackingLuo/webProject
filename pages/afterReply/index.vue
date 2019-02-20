@@ -16,7 +16,7 @@
           <div class="myCollect" @mouseenter="enterNum=2" @mouseleave="enterNum=1">
             <Icon v-if="enterNum==1" type="md-star-outline" color="#aaa" size="28" style="position: absolute;top: 50%;transform: translateY(-50%);left: -5px;"/>
             <Icon v-if="enterNum==2" type="md-star"  color="#ffd026" size="28" style="position: absolute;top: 50%;transform: translateY(-50%);left: -5px;"/>
-            <span style="font-size: 18px;" :class="enterNum==2?'coll':''" v-text="detailNews.isCollect=='Y'?'已收藏':'收藏'" @click="collection"></span>
+            <span style="font-size: 18px;" :class="enterNum==2?'coll':''" v-html="detailNews.isCollect=='Y'?'已收藏':'收藏'" @click="collection"></span>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
   import rightSwiper from "../../components/rightSwiper";
   import critical from "../../components/critical";
   import axios from "../../plugins/axios";
-  import {NEWS_CONTENT,ADD_COLLECT} from "~/server/api"
+  import {NEWS_CONTENT,ADD_COLLECT,DEL_COLLECT} from "~/server/api"
   export default {
         name: "index",
         layout:"topNav",
@@ -51,6 +51,13 @@
           return{
             enterNum:1,
             detailNews:{},
+            collectRes:{
+              param:{
+                mainId:0,
+                type:'news'
+              },
+              userId:19,
+            },
             requestRes:{
               param:{
                 id:0,
@@ -61,6 +68,7 @@
         },
         created(){
           this.requestRes.param.id = this.$route.query.id;
+          this.collectRes.param.id = this.$route.query.id;
           this.init()
         },
         methods:{
@@ -85,15 +93,31 @@
             })
           },
           collection(){
-            axios.post(ADD_COLLECT,this.requestRes).then((res)=>{
-              if(res.status==200){
-
-              }else{
-                this.$Notice.error({
-                  title: "获取内容失败,请检查当前网络!",
-                });
-              }
-            })
+            if(this.detailNews.isCollect=='Y'){
+              axios.post(DEL_COLLECT,this.collectRes).then((res)=>{
+                if(res.status==200 && res.data.resultCode==0){
+                  if(res.data.extra.ifCollect==0){
+                    this.detailNews.isCollect ='N';
+                  }
+                }else{
+                  this.$Notice.error({
+                    title: res.data.errorMsg,
+                  });
+                }
+              })
+            }else{
+              axios.post(ADD_COLLECT,this.collectRes).then((res)=>{
+                if(res.status==200 && res.data.resultCode==0){
+                  if(res.data.extra.ifCollect==1){
+                    this.detailNews.isCollect ='Y';
+                  }
+                }else{
+                  this.$Notice.error({
+                    title: res.data.errorMsg,
+                  });
+                }
+              })
+            }
           }
         }
     }
