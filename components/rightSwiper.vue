@@ -8,26 +8,28 @@
           <div class="hotRB">
             <div class="hotTitle"><span></span>热榜</div>
             <div class="hotBody">
-              <div class="listOne" v-for="(item,index) in list" :key="index">
-                <div class="oneImg"></div>
-                <div class="oneName">名字</div>
-                <div class="oneFollow">+ 关注</div>
+              <div class="listOne" v-for="(item,index) in hotPeople" :key="index">
+                <div class="oneImg"><img :src="item.headPortrait"></div>
+                <div class="oneName" v-text="item.nickname"></div>
+                <div class="oneFollow" @click="clickFollow(item,index)" v-text="item.isfollow=='Y'?'已关注':'+ 关注'"></div>
               </div>
             </div>
           </div>
         </CarouselItem>
-        <CarouselItem>
-          <div class="demo-carousel">2</div>
-        </CarouselItem>
-        <CarouselItem>
-          <div class="demo-carousel">3</div>
-        </CarouselItem>
+        <!--<CarouselItem>-->
+          <!--<div class="demo-carousel">2</div>-->
+        <!--</CarouselItem>-->
+        <!--<CarouselItem>-->
+          <!--<div class="demo-carousel">3</div>-->
+        <!--</CarouselItem>-->
       </Carousel>
     </div>
   </div>
 </template>
 
 <script>
+  import axios from "../plugins/axios";
+  import {ADD_FOLLOW,DEL_FOLLOW} from "~/server/api"
   import search from "./search";
   import notLogin from "./notLogin";
     export default {
@@ -36,13 +38,50 @@
         search,
         notLogin
       },
+      props: {
+        hotPeople: {
+          default: []
+        },
+      },
       data(){
           return{
             value1:0,
             list:[1,2],
+            hotPopRes:{
+              param:{
+                toUserId:'',
+              },
+              userId:19,
+            }
           }
       },
       methods:{
+          //关注事件
+        clickFollow(item,index){
+          if(item.isfollow=='Y'){
+            this.hotPopRes.param.toUserId = item.userId;
+            axios.post(DEL_FOLLOW,this.hotPopRes).then((res)=>{
+              if(res.status==200){
+                this.hotPeople[index].isfollow = 'N'
+              }else{
+                this.$Notice.error({
+                  title:res.data.errorMsg,
+                });
+              }
+            })
+          }else{
+            this.hotPopRes.param.toUserId = item.userId;
+            axios.post(ADD_FOLLOW,this.hotPopRes).then((res)=>{
+              if(res.status==200){
+                this.hotPeople[index].isfollow = 'Y'
+              }else{
+                this.$Notice.error({
+                  title:res.data.errorMsg,
+                });
+              }
+            })
+          }
+        },
         getInputText(data){
           console.log(data);
         },
@@ -113,5 +152,9 @@
     border-radius: 50%;
     overflow: hidden;
     background-color: #bbb;
+  }
+  .oneImg img{
+    width: 100%;
+    height: 100%;
   }
 </style>

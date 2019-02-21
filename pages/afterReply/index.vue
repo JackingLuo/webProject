@@ -31,7 +31,7 @@
     <div class="botLine">
       <critical></critical>
     </div>
-    <rightSwiper></rightSwiper>
+    <rightSwiper :hotPeople="hotPeople"></rightSwiper>
     </div>
 </template>
 
@@ -39,7 +39,7 @@
   import rightSwiper from "../../components/rightSwiper";
   import critical from "../../components/critical";
   import axios from "../../plugins/axios";
-  import {NEWS_CONTENT,ADD_COLLECT,DEL_COLLECT,ADD_FOLLOW,DEL_FOLLOW} from "~/server/api"
+  import {NEWS_CONTENT,ADD_COLLECT,DEL_COLLECT,ADD_FOLLOW,DEL_FOLLOW,SENSATION} from "~/server/api"
   export default {
         name: "index",
         layout:"topNav",
@@ -69,7 +69,8 @@
                 id:0,
               },
               userId:19,
-            }
+            },
+            hotPeople:[],
           }
         },
         created(){
@@ -79,6 +80,7 @@
         },
         methods:{
           init(){
+            //获取详情
             axios.post(NEWS_CONTENT,this.requestRes).then((res)=>{
               if(res.status==200){
                 this.detailNews = res.data.data.detailNews;
@@ -96,8 +98,19 @@
                   title: "获取内容失败,请检查当前网络!",
                 });
               }
-            })
+            });
+            //获取右下角的网络红人
+            axios.post(SENSATION,{userId:19}).then((res)=>{
+              if(res.status==200){
+                this.hotPeople = res.data.data.list;
+              }else{
+                this.$Notice.error({
+                  title: "获取内容失败,请检查当前网络!",
+                });
+              }
+            });
           },
+          //收藏点击事件
           collection(){
             if(this.detailNews.isCollect=='Y'){
               axios.post(DEL_COLLECT,this.collectRes).then((res)=>{
@@ -107,7 +120,7 @@
                   }
                 }else{
                   this.$Notice.error({
-                    title: res.data.errorMsg,
+                    title:res.data.errorMsg,
                   });
                 }
               })
@@ -125,6 +138,7 @@
               })
             }
           },
+          //是否关注事件
           // clickFollow(){
           //   if(this.detailNews.isFollowed>0){//已关注
           //     axios.post(DEL_FOLLOW,this.followRes).then((res)=>{

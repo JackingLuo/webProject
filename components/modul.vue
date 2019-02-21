@@ -7,12 +7,12 @@
           <TabPane label="登录" name="loding">
             <Form inline class="firstForm">
               <FormItem prop="user"  style="width: 100%;">
-                <Input placeholder="请输入手机号/邮箱" style="width: 100%;font-size: 12px" size="large">
+                <Input placeholder="请输入手机号/邮箱" style="width: 100%;font-size: 12px" size="large" v-model="userInfo.detail.userName">
                 <Icon type="md-tablet-portrait" slot="prefix" color="#f0c521" size="20" />
                 </Input>
               </FormItem>
               <FormItem prop="password"  style="width: 100%;margin-top: 0.3rem;">
-                <Input placeholder="请输入密码" style="width: 100%" size="large">
+                <Input placeholder="请输入密码" style="width: 100%" size="large" v-model="userInfo.detail.password">
                 <Icon type="ios-key-outline" slot="prefix" color="#f0c521" size="20"/>
                 </Input>
               </FormItem>
@@ -20,41 +20,41 @@
                 <span style="cursor: pointer;color: #999;"><Icon type="ios-key-outline" color="#f0c521"/>找回密码</span>
               </Row>
               <FormItem style="width: 100%; margin-top: 0.45rem;">
-                <div class="submitBtn">登录</div>
+                <div class="submitBtn" @click="toLogin">登录</div>
               </FormItem>
             </Form>
           </TabPane>
           <TabPane label="注册" name="register">
-            <Form :model="user" inline class="secondForm">
+            <Form :model="register.user" inline class="secondForm">
               <FormItem style="width: 100%;">
-                <Input placeholder="昵称" style="width: 100%;" size="large" v-model="user.nickname">
+                <Input placeholder="昵称" style="width: 100%;" size="large" v-model="register.user.nickname">
                 <Icon type="md-contact" slot="prefix" color="#f0c521"size="20" />
                 </Input>
               </FormItem>
               <FormItem style="width: 100%;">
-                <Input placeholder="手机号" style="width: 100%" size="large" v-model="user.phone">
+                <Input placeholder="手机号" style="width: 100%" size="large" v-model="register.user.phone">
                 <Icon type="md-tablet-portrait" slot="prefix" color="#f0c521"size="20" />
                 </Input>
               </FormItem>
               <FormItem style="width: 100%;">
                 <Row>
                   <Col span="16" class="inputBox">
-                    <Input placeholder="手机号" style="width: 100%" size="large" v-model="user.verifyCode">
+                    <Input placeholder="验证码" style="width: 100%" size="large" v-model="register.user.verifyCode">
                     <Icon type="ios-chatbubbles" slot="prefix" color="#f0c521" size="20"/>
                     </Input>
                   </Col>
                   <Col span="8">
-                    <div class="getBox" @click="getverifyCode">获取验证码</div>
+                    <div class="getBox" @click="getverifyCode" v-text="veriText"></div>
                   </Col>
                 </Row>
               </FormItem>
               <FormItem style="width: 100%;">
-                <Input placeholder="请设置登录密码" style="width: 100%" size="large" v-model="user.password">
+                <Input placeholder="请设置登录密码" style="width: 100%" size="large" v-model="register.user.password">
                 <Icon type="ios-key-outline" slot="prefix" color="#f0c521" size="20" />
                 </Input>
               </FormItem>
               <FormItem style="width: 100%;margin-top: 0.25rem;">
-                <div class="submitBtn">注册</div>
+                <div class="submitBtn" @click="toRegister">注册</div>
               </FormItem>
             </Form>
           </TabPane>
@@ -68,6 +68,8 @@
 </template>
 
 <script>
+  import axios from "../plugins/axios";
+  import {TO_LOGIN,TO_REGISTER,GET_VERIFYCODE} from "~/server/api"
     export default {
       name: "modul",
       props: {
@@ -77,16 +79,55 @@
       },
         data(){
             return{
-              user: {
-                nickname:'',
-                phone:'',
-                verifyCode:'',
-                password:''
+              userInfo:{
+                detail:{
+                  userName:'',
+                  password:''
+                }
               },
-
+              verifyCode:{
+                param:{
+                  type:'1',
+                  phone:'',
+                }
+              },
+              register:{
+                user: {
+                  nickname:'',
+                  phone:'',
+                  verifyCode:'',
+                  password:''
+                },
+              },
+              veriText:'获取验证码',
+              flag:true
             }
         },
         methods:{
+          //登录事件
+          toLogin(){
+            axios.post(TO_LOGIN,this.userInfo).then((res)=>{
+              if(res.status==200){
+                console.log(res);
+              }else{
+                this.$Notice.error({
+                  title: res.data.errorMsg,
+                });
+              }
+            });
+          },
+          //注册事件
+          toRegister(){
+            axios.post(TO_REGISTER,this.register).then((res)=>{
+              if(res.status==200&& res.data.resultCode=='0'){
+                this.$Message.success(res.data.errorMsg);
+              }else{
+                this.$Notice.error({
+                  title:res.data.errorMsg,
+                });
+              }
+            });
+          },
           hideLoding(e){
             if(e.target.id=="over"){
               //点击遮罩层关闭
@@ -95,7 +136,30 @@
           },
           getverifyCode(){
             //调取验证码接口,设置定时器
+            this.verifyCode.param.phone = this.register.user.phone;
+            let time = 60;
+            if(this.flag){
+              this.flag = false;
+              let timeFlag = setInterval(()=>{
+                if(time>=0){
+                  time--;
+                  this.veriText = time+'';
+                }else{
+                  clearInterval(timeFlag);
+                  this.flag = true;
+                  this.veriText = '获取验证码';
+                }this.$Message.success(res.data.errorMsg);
+              },1000);
+              axios.post(GET_VERIFYCODE,this.verifyCode).then((res)=>{
+                if(res.status==200 && res.data.resultCode=='0'){
 
+                }else{
+                  this.$Notice.error({
+                    title: res.data.errorMsg,
+                  });
+                }
+              });
+            }
           }
         }
     }

@@ -110,7 +110,7 @@ export default {
     },
     //获取到子组件返回来的input框输入值
     getInputText(data){
-      console.log(data);
+
     }
   }
 }
