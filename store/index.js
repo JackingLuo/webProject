@@ -3,15 +3,22 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-//可以把store状态管理理解成为一个公共的仓库,所有页面和组件都可以来访问和改变这个全局的指!
+//可以把store状态管理理解成为一个公共的仓库,所有页面和组件都可以来访问和改变这个全局的值!
 
 const store = () =>  new Vuex.Store({
   state:{
     //定义数据
     nowLeft:0,
+    isLogin:false,
+    userId:'',
     isCheck:false,//校验是否通过验证
   },
   mutations:{
+    //是否登录了
+    changeLogin(state,userId){
+      state.isLogin = true;
+      state.userId = userId;
+    },
     //定义方法,改变state中的数据
     change(state){
       state.isCheck = true;
@@ -22,4 +29,4 @@ const store = () =>  new Vuex.Store({
     }
   },
 });
-export default store
+export default store;

@@ -7,17 +7,17 @@
           <TabPane label="登录" name="loding">
             <Form inline class="firstForm">
               <FormItem prop="user"  style="width: 100%;">
-                <Input placeholder="请输入手机号/邮箱" style="width: 100%;font-size: 12px" size="large" v-model="userInfo.detail.userName">
+                <Input placeholder="请输入手机号/邮箱" style="width: 100%;font-size: 12px" size="large" v-model="userInfo.param.detail.userName">
                 <Icon type="md-tablet-portrait" slot="prefix" color="#f0c521" size="20" />
                 </Input>
               </FormItem>
               <FormItem prop="password"  style="width: 100%;margin-top: 0.3rem;">
-                <Input placeholder="请输入密码" style="width: 100%" size="large" v-model="userInfo.detail.password">
+                <Input placeholder="请输入密码" type="password" style="width: 100%" size="large" v-model="userInfo.param.detail.password">
                 <Icon type="ios-key-outline" slot="prefix" color="#f0c521" size="20"/>
                 </Input>
               </FormItem>
               <Row style="margin-top: 0.15rem;text-align: right;font-size: 12px;">
-                <span style="cursor: pointer;color: #999;"><Icon type="ios-key-outline" color="#f0c521"/>找回密码</span>
+                <span style="cursor: pointer;color: #999;" @click="$router.push({path:'/retrievePsd'})"><Icon type="ios-key-outline" color="#f0c521"/>找回密码</span>
               </Row>
               <FormItem style="width: 100%; margin-top: 0.45rem;">
                 <div class="submitBtn" @click="toLogin">登录</div>
@@ -27,19 +27,24 @@
           <TabPane label="注册" name="register">
             <Form :model="register.user" inline class="secondForm">
               <FormItem style="width: 100%;">
-                <Input placeholder="昵称" style="width: 100%;" size="large" v-model="register.user.nickname">
+                <Input placeholder="用户名" style="width: 100%;" size="large" v-model="register.param.user.userName">
                 <Icon type="md-contact" slot="prefix" color="#f0c521"size="20" />
                 </Input>
               </FormItem>
               <FormItem style="width: 100%;">
-                <Input placeholder="手机号" style="width: 100%" size="large" v-model="register.user.phone">
+                <Input placeholder="昵称" style="width: 100%;" size="large" v-model="register.param.user.nickname">
+                <Icon type="md-person" slot="prefix" color="#f0c521"size="20" />
+                </Input>
+              </FormItem>
+              <FormItem style="width: 100%;">
+                <Input placeholder="手机号" style="width: 100%" size="large" v-model="register.param.user.phone">
                 <Icon type="md-tablet-portrait" slot="prefix" color="#f0c521"size="20" />
                 </Input>
               </FormItem>
               <FormItem style="width: 100%;">
                 <Row>
                   <Col span="16" class="inputBox">
-                    <Input placeholder="验证码" style="width: 100%" size="large" v-model="register.user.verifyCode">
+                    <Input placeholder="验证码" style="width: 100%" size="large" v-model="register.param.user.verifyCode">
                     <Icon type="ios-chatbubbles" slot="prefix" color="#f0c521" size="20"/>
                     </Input>
                   </Col>
@@ -49,7 +54,7 @@
                 </Row>
               </FormItem>
               <FormItem style="width: 100%;">
-                <Input placeholder="请设置登录密码" style="width: 100%" size="large" v-model="register.user.password">
+                <Input placeholder="请设置登录密码" type="password" style="width: 100%" size="large" v-model="register.param.user.password">
                 <Icon type="ios-key-outline" slot="prefix" color="#f0c521" size="20" />
                 </Input>
               </FormItem>
@@ -80,9 +85,11 @@
         data(){
             return{
               userInfo:{
-                detail:{
-                  userName:'',
-                  password:''
+                param:{
+                  detail:{
+                    userName:'',
+                    password:''
+                  }
                 }
               },
               verifyCode:{
@@ -92,12 +99,15 @@
                 }
               },
               register:{
-                user: {
-                  nickname:'',
-                  phone:'',
-                  verifyCode:'',
-                  password:''
-                },
+                param:{
+                  user: {
+                    userName:'',
+                    nickname:'',
+                    phone:'',
+                    verifyCode:'',
+                    password:''
+                  }
+                }
               },
               veriText:'获取验证码',
               flag:true
@@ -108,7 +118,8 @@
           toLogin(){
             axios.post(TO_LOGIN,this.userInfo).then((res)=>{
               if(res.status==200){
-                console.log(res);
+                console.log(res.data);
+                // this.$store.commit('changeLogin',res.data.data.detail.userId);//改变登录状态
               }else{
                 this.$Notice.error({
                   title: res.data.errorMsg,
@@ -121,6 +132,7 @@
             axios.post(TO_REGISTER,this.register).then((res)=>{
               if(res.status==200&& res.data.resultCode=='0'){
                 this.$Message.success(res.data.errorMsg);
+                this.$emit("hideModul",false);
               }else{
                 this.$Notice.error({
                   title:res.data.errorMsg,
@@ -136,8 +148,8 @@
           },
           getverifyCode(){
             //调取验证码接口,设置定时器
-            this.verifyCode.param.phone = this.register.user.phone;
-            let time = 60;
+            this.verifyCode.param.phone = this.register.param.user.phone;
+            let time = 900;//验证码的过期时间
             if(this.flag){
               this.flag = false;
               let timeFlag = setInterval(()=>{
@@ -148,11 +160,11 @@
                   clearInterval(timeFlag);
                   this.flag = true;
                   this.veriText = '获取验证码';
-                }this.$Message.success(res.data.errorMsg);
+                }
               },1000);
               axios.post(GET_VERIFYCODE,this.verifyCode).then((res)=>{
                 if(res.status==200 && res.data.resultCode=='0'){
-
+                  this.$Message.success(res.data.errorMsg);
                 }else{
                   this.$Notice.error({
                     title: res.data.errorMsg,
@@ -213,7 +225,7 @@
   .modulBot{
     width: 100%;
     position: absolute;
-    bottom: 1.7rem;
+    bottom: 1.5rem;
     left: 0;
     padding:0 0.7rem ;
     color: #f0c521;

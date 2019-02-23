@@ -29,7 +29,7 @@
 
 <script>
   import axios from "../plugins/axios";
-  import {ADD_FOLLOW,DEL_FOLLOW} from "~/server/api"
+  import {ADD_FOLLOW,DEL_FOLLOW,INFO_SEARCH} from "~/server/api"
   import search from "./search";
   import notLogin from "./notLogin";
     export default {
@@ -82,8 +82,17 @@
             })
           }
         },
-        getInputText(data){
-          console.log(data);
+        //搜索组件返回的输入框数据
+        getInputText(inputText){
+          // axios.post(DEL_FOLLOW,this.hotPopRes).then((res)=>{
+          //   if(res.status==200){
+          //     this.hotPeople[index].isfollow = 'N'
+          //   }else{
+          //     this.$Notice.error({
+          //       title:res.data.errorMsg,
+          //     });
+          //   }
+          // })
         },
       }
     }

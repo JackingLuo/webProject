@@ -11,3 +11,6 @@ export const DEL_COLLECT = `${BASEURL}/news/delCollect`;//取消收藏
 export const ADD_FOLLOW = `${BASEURL}/news/addFollow`;//关注
 export const DEL_FOLLOW = `${BASEURL}/news/delFollow`;//取消关注
 export const SENSATION = `${BASEURL}/user/getInternetSensation`;//查询网络红人
+export const INFO_SEARCH = `${BASEURL}/dynamic/search`;//资讯详情的搜索
+
+

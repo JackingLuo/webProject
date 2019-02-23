@@ -115,7 +115,7 @@
             if(this.detailNews.isCollect=='Y'){
               axios.post(DEL_COLLECT,this.collectRes).then((res)=>{
                 if(res.status==200 && res.data.resultCode==0){
-                  if(res.data.extra.ifCollect==0){
+                  if(res.data.data.ifCollect==0){
                     this.detailNews.isCollect ='N';
                   }
                 }else{
@@ -238,6 +238,7 @@
 }
 .explainCont .cont{
   padding:0.2rem 0 0.25rem 0;
+  /*line-height: 150%;*/
 }
 
   .botLine{
