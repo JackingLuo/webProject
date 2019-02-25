@@ -7,7 +7,7 @@
           <TabPane label="登录" name="loding">
             <Form inline class="firstForm">
               <FormItem prop="user"  style="width: 100%;">
-                <Input placeholder="请输入手机号/邮箱" style="width: 100%;font-size: 12px" size="large" v-model="userInfo.param.detail.userName">
+                <Input placeholder="请输入用户名" style="width: 100%;font-size: 12px" size="large" v-model="userInfo.param.detail.userName">
                 <Icon type="md-tablet-portrait" slot="prefix" color="#f0c521" size="20" />
                 </Input>
               </FormItem>
@@ -118,8 +118,11 @@
           toLogin(){
             axios.post(TO_LOGIN,this.userInfo).then((res)=>{
               if(res.status==200){
-                console.log(res.data);
-                // this.$store.commit('changeLogin',res.data.data.detail.userId);//改变登录状态
+                this.$store.commit('getpesonInfo',res.data.data.detail);//存储登录信息
+                this.$store.commit('changeLogin',res.data.data.detail.userId);//改变登录状态
+                //存一个localstorage
+                localStorage.setItem('LOGININFO',JSON.stringify(res.data.data.detail));
+                this.$emit("hideModul",false);
               }else{
                 this.$Notice.error({
                   title: res.data.errorMsg,

@@ -8,9 +8,10 @@ Vue.use(Vuex);
 const store = () =>  new Vuex.Store({
   state:{
     //定义数据
+    pesonInfo:{},//登陆后的个人信息
+    isLogin:false,//是否已经登录
+    userId:'',//登陆后的用户id
     nowLeft:0,
-    isLogin:false,
-    userId:'',
     isCheck:false,//校验是否通过验证
   },
   mutations:{
@@ -19,6 +20,17 @@ const store = () =>  new Vuex.Store({
       state.isLogin = true;
       state.userId = userId;
     },
+    outLogin(state){
+      state.isLogin = false;
+      state.userId = '19';
+    },
+    getpesonInfo(state,pesonInfo){
+      state.pesonInfo = pesonInfo;
+    },
+
+
+
+
     //定义方法,改变state中的数据
     change(state){
       state.isCheck = true;

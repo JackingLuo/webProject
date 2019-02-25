@@ -39,6 +39,15 @@
           }else if(this.$route.path=="/jobQuotation"){
             this.nowNum = 3;
           }
+          //判断是否有之前登录的缓存
+        if(process.browser){
+          const loginInfo= JSON.parse(localStorage.getItem('LOGININFO'));
+          if(loginInfo && this.$store){
+            this.$store.commit('changeLogin',loginInfo.userId);//获取缓存到的用户Id
+          }
+        }else{
+          this.$store.commit('changeLogin','19');
+        }
       },
       methods:{
         clickOne(){

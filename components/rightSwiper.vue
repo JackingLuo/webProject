@@ -1,18 +1,29 @@
 <template>
   <div class="pepRight">
     <search @giveParent="getInputText"></search>
-    <notLogin></notLogin>
+    <component :is ="$store.state.isLogin?'login':'notLogin'"></component>
     <div class="botSwiper">
       <Carousel v-model="value1" dots="outside" radius-dot :loop="false" style="width: 100%;height: 100%; margin-top: 0.23rem;" arrow="never">
         <CarouselItem>
           <div class="hotRB">
             <div class="hotTitle"><span></span>热榜</div>
-            <div class="hotBody">
+            <div class="hotBody" v-if="swiperType==2">
               <div class="listOne" v-for="(item,index) in hotPeople" :key="index">
                 <div class="oneImg"><img :src="item.headPortrait"></div>
                 <div class="oneName" v-text="item.nickname"></div>
                 <div class="oneFollow" @click="clickFollow(item,index)" v-text="item.isfollow=='Y'?'已关注':'+ 关注'"></div>
               </div>
+            </div>
+            <div class="hotBody2" v-if="swiperType==1">
+              <Row class="oneList">
+                <Col span="9" class="colBox"><img src=""></Col>
+                <Col span="15" style="position: relative">
+                  <h3></h3>
+                  <div class="date">
+
+                  </div>
+                </Col>
+              </Row>
             </div>
           </div>
         </CarouselItem>
@@ -32,28 +43,42 @@
   import {ADD_FOLLOW,DEL_FOLLOW,INFO_SEARCH} from "~/server/api"
   import search from "./search";
   import notLogin from "./notLogin";
-    export default {
+  import login from "./login";
+  export default {
         name: "rightSwiper",
       components:{
         search,
-        notLogin
+        notLogin,
+        login
       },
       props: {
         hotPeople: {
           default: []
         },
+        swiperType:{//1表示文章类型的,2表示网络红人类型的
+          default: 1,
+        }
       },
       data(){
           return{
+            whereCompoent:'notLogin',
             value1:0,
             list:[1,2],
             hotPopRes:{
               param:{
                 toUserId:'',
               },
-              userId:19,
+              userId:this.$store.state.userId,
             }
           }
+      },
+      created(){
+        if(process.browser){
+          const loginInfo= JSON.parse(localStorage.getItem('LOGININFO'));
+          if(loginInfo){
+            this.$store.commit('getpesonInfo',loginInfo);//获取缓存到的登录信息
+          }
+        }
       },
       methods:{
           //关注事件
@@ -84,15 +109,7 @@
         },
         //搜索组件返回的输入框数据
         getInputText(inputText){
-          // axios.post(DEL_FOLLOW,this.hotPopRes).then((res)=>{
-          //   if(res.status==200){
-          //     this.hotPeople[index].isfollow = 'N'
-          //   }else{
-          //     this.$Notice.error({
-          //       title:res.data.errorMsg,
-          //     });
-          //   }
-          // })
+
         },
       }
     }
@@ -165,5 +182,28 @@
   .oneImg img{
     width: 100%;
     height: 100%;
+  }
+
+  .hotBody2{
+    background-color: #fff;
+    margin-top: 0.25rem;
+  }
+  .oneList{
+    padding: 0.25rem 0.15rem;
+  }
+  .colBox{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .colBox img{
+    width: 100%;
+    height: 100%;
+
+  }
+  .date{
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 </style>

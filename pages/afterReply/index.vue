@@ -31,7 +31,7 @@
     <div class="botLine">
       <critical></critical>
     </div>
-    <rightSwiper :hotPeople="hotPeople"></rightSwiper>
+    <rightSwiper :hotPeople="hotPeople" :swiperType="swiperType"></rightSwiper>
     </div>
 </template>
 
@@ -50,25 +50,26 @@
         data(){
           return{
             enterNum:1,
+            swiperType:1,//1表示资讯,2表示网络红人
             detailNews:{},
             followRes:{
               param:{
                 toUserId:0,
               },
-              userId:19,
+              userId:this.$store.state.userId,
             },
             collectRes:{
               param:{
                 mainId:0,
                 type:'news'
               },
-              userId:19,
+              userId:this.$store.state.userId,
             },
             requestRes:{
               param:{
                 id:0,
               },
-              userId:19,
+              userId:this.$store.state.userId,
             },
             hotPeople:[],
           }
@@ -82,7 +83,7 @@
           init(){
             //获取详情
             axios.post(NEWS_CONTENT,this.requestRes).then((res)=>{
-              if(res.status==200){
+              if(res.status==200 && res.data.data){
                 this.detailNews = res.data.data.detailNews;
                 let regExp = /\|/;
                 let newArr = null;
@@ -99,16 +100,9 @@
                 });
               }
             });
-            //获取右下角的网络红人
-            axios.post(SENSATION,{userId:19}).then((res)=>{
-              if(res.status==200){
-                this.hotPeople = res.data.data.list;
-              }else{
-                this.$Notice.error({
-                  title: "获取内容失败,请检查当前网络!",
-                });
-              }
-            });
+            //查询右侧热门资讯接口
+
+
           },
           //收藏点击事件
           collection(){

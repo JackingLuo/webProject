@@ -55,7 +55,7 @@
               recommend:'yes',
               hot:'yes',
             },
-            userId:19
+            userId:this.$store.state.userId
           },
           imgs:[],
           value:0,

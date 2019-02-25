@@ -1,32 +1,38 @@
 <template>
   <div class="login">
     <div class="header">
-      <div class="headImg"></div>
-      <h3>名字</h3>
-      <div class="goOut">退出</div>
+      <div class="headImg"><img :src="$store.state.pesonInfo.headPortrait" v-if="$store.state.pesonInfo.headPortrait"></div>
+      <h3 v-text="$store.state.pesonInfo.nickname"></h3>
+      <div class="goOut" @click="goOut">退出</div>
     </div>
     <Row>
-      <Col span="12"><div style="padding-left: 0.6rem;">发布</div></Col>
-      <Col span="12"><div style="padding-left: 0.6rem;">粉丝</div></Col>
+      <Col span="12"><div style="padding-left: 0.6rem;">发布 {{$store.state.pesonInfo.publishCount?$store.state.pesonInfo.publishCount:'0'}}</div></Col>
+      <Col span="12"><div style="padding-left: 0.6rem;">粉丝 {{$store.state.pesonInfo.beFollowedCount?$store.state.pesonInfo.beFollowedCount:'0'}}</div></Col>
     </Row>
     <Row style="padding: 0.13rem 0;">
-      <Col span="12"><div style="padding-left: 0.6rem;">新消息</div></Col>
-      <Col span="12"><div style="padding-left: 0.6rem;">关注</div></Col>
+      <Col span="12"><div style="padding-left: 0.6rem;">新消息 {{$store.state.pesonInfo.newMessageCount?$store.state.pesonInfo.newMessageCount:'0'}}</div></Col>
+      <Col span="12"><div style="padding-left: 0.6rem;">关注 {{$store.state.pesonInfo.followCount?$store.state.pesonInfo.followCount:'0'}}</div></Col>
     </Row>
     <Row>
-      <Col span="12"><div style="padding-left: 0.6rem;">收藏</div></Col>
+      <Col span="12"><div style="padding-left: 0.6rem;">收藏 {{$store.state.pesonInfo.collectCount?$store.state.pesonInfo.collectCount:'0'}}</div></Col>
     </Row>
   </div>
 </template>
 <script>
   export default {
+
     data () {
       return {
 
       }
     },
     methods:{
-
+      goOut(){
+        if(process.browser){
+          localStorage.removeItem('LOGININFO');
+          this.$store.commit('outLogin');
+        }
+      }
     }
   }
 </script>

@@ -20,7 +20,7 @@
       </Row>
       <component :is ='where'></component>
     </div>
-    <rightSwiper></rightSwiper>
+    <rightSwiper :hotPeople="hotPeople" :swiperType="swiperType"></rightSwiper>
   </div>
 </template>
 
@@ -29,6 +29,8 @@
   import dynamic from "../../components/dynamic";
   import answers from "../../components/answers";
   import rightSwiper from "../../components/rightSwiper";
+  import axios from "../../plugins/axios";
+  import {SENSATION} from "~/server/api"
   export default {
     name: "index",
     layout:"topNav",
@@ -42,9 +44,26 @@
       return{
         where:"hot",
         howNum:1,
+        swiperType:2,
+        hotPeople:[]
       }
     },
+    created(){
+      this.init()
+    },
     methods:{
+      init(){
+        //查询右下角的网络红人
+        axios.post(SENSATION,{userId:19}).then((res)=>{
+          if(res.status==200){
+            this.hotPeople = res.data.data.list;
+          }else{
+            this.$Notice.error({
+              title: "获取内容失败,请检查当前网络!",
+            });
+          }
+        });
+      },
       clickHot(){
         this.where = "hot";
         this.howNum = 1;
